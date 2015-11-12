@@ -255,7 +255,7 @@
     {
         NSLog(@"READY TO PLAY");
         [self.player play];
-//        self.playButton.enabled = YES;
+        self.isPlaying = YES;
         
     }
 }

@@ -49,9 +49,13 @@
 
 - (IBAction)playToggle:(id)sender {
     CentralViewController * prevController = [self backViewController];
-    [[prevController player] pause];
-    
-//    [self.player pause];
+    if (prevController.isPlaying) {
+        [[prevController player] pause];
+        prevController.isPlaying = NO;
+    } else {
+        [[prevController player] play];
+        prevController.isPlaying = YES;
+    }
     
 }
 

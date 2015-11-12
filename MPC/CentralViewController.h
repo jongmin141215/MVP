@@ -21,6 +21,7 @@
 @property NSUInteger songSize;
 @property (strong, nonatomic) NSArray *songTitles;
 @property (strong, nonatomic) NSArray *artworks;
-@property (strong,nonatomic) NSString *songToPlayTitle;
+@property (strong, nonatomic) NSString *songToPlayTitle;
+@property (nonatomic) BOOL *isPlaying;
 
 @end
