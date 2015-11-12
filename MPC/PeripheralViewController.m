@@ -115,8 +115,8 @@
     
     //songs need to be exported and ready!
     
-    
-    [self.appDelegate.mpcHandler advertiseSelf:NO];
+//    [self.appDelegate.mpcHandler advertiseSelf:NO];
+    [self.appDelegate.mpcHandler advertiseSelf:YES];
     
     NSError *error;
     
@@ -253,6 +253,7 @@
                                           toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
                                          withMode:MCSessionSendDataReliable
                                             error:&error];
+    NSLog(@"peripheral sent message to central");
     
 }
 
@@ -302,7 +303,6 @@
     
     exporter.outputFileType = @"com.apple.m4a-audio";
     exporter.shouldOptimizeForNetworkUse = YES;
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * myDocumentsDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
     
@@ -324,6 +324,7 @@
     // (completion handler block omitted)
     [exporter exportAsynchronouslyWithCompletionHandler:
      ^{
+         NSLog(@"Start export");
          int exportStatus = exporter.status;
          
          switch (exportStatus)
@@ -347,6 +348,7 @@
                  //DLog(@"Data %@",data);
                  data = nil;
                  
+                 NSLog(@"Dictionary length is %lu",(unsigned long)_fullSongDictionary.count);
                  break;
              }
              case AVAssetExportSessionStatusUnknown:
@@ -371,6 +373,7 @@
              }
          }
      }];
+    NSLog(@"Completed export");
 }
 
 @end

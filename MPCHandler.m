@@ -39,7 +39,7 @@
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state {
     NSDictionary *userInfo = @{ @"peerID": peerID,
                                 @"state" : @(state) };
-    
+    NSLog(@"%@ changed state %ld",peerID, (long)state);
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MPCDemo_DidChangeStateNotification"
                                                             object:nil

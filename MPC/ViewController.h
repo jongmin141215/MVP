@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) AppDelegate *appDelegate;
 
 @end
 
