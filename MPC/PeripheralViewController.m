@@ -73,6 +73,7 @@
 
     _byteIndex = 0;
     _songTitles = [[NSMutableArray alloc]init];
+    _artworks = [[NSMutableArray alloc] init];
     _fullSongDictionary = [[NSMutableDictionary alloc]init];
     _fullSongData = [NSData data];
     _playingSongData = [NSData data];
@@ -228,8 +229,10 @@
     self.songs = [collection items];
     NSLog(@"got the songs");
     //    [self mediaItemToData:collection.items[0]]; //////////////////
+    
     for (MPMediaItem *song in self.songs) {
          [self.songTitles addObject:[song valueForProperty: MPMediaItemPropertyTitle]];
+        [self.artworks addObject:[[song valueForProperty:MPMediaItemPropertyArtwork] imageWithSize:CGSizeMake(44, 44)]];
         [self mediaItemToData:song withTitle:[song valueForProperty: MPMediaItemPropertyTitle]];
         NSLog(@"Number of items exported %lu", (unsigned long)_fullSongDictionary.count);
         NSLog(@"Title %@",[song valueForProperty: MPMediaItemPropertyTitle] );
@@ -238,22 +241,23 @@
     
     
     
-    
+    NSLog(@"artworks array: %@", _artworks);
     
     NSError *error;
     
     NSLog(@"start");
-    NSDictionary * myHash = @{@"songList":_songTitles,@"play": @"No"};
+    NSDictionary * myHash = @{@"songList":_songTitles, @"artworks": _artworks, @"play": @"No"};
     NSLog(@"end");
+    NSLog(@"myHash: %@", myHash);
     NSData *myData = [NSKeyedArchiver archivedDataWithRootObject: myHash];
     NSLog(@"success");
 //    return;
-    
+    NSLog(@"before sending");
     [self.appDelegate.mpcHandler.session sendData:myData
                                           toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
                                          withMode:MCSessionSendDataReliable
                                             error:&error];
-    
+    NSLog(@"after sending");
 }
 
 

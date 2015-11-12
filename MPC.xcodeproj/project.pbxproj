@@ -26,6 +26,7 @@
 		0D2944CE1BF3230900AA6F86 /* CentralViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 0D2944C71BF2D2BA00AA6F86 /* CentralViewController.h */; };
 		0D2944CF1BF3230900AA6F86 /* PeripheralViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 0D2944CA1BF2D2CF00AA6F86 /* PeripheralViewController.h */; };
 		0D2944D01BF3230900AA6F86 /* ViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 0D29448F1BF2D15100AA6F86 /* ViewController.h */; };
+		0D29451A1BF51D7C00AA6F86 /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2945191BF51D7C00AA6F86 /* NowPlayingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		0D2944C81BF2D2BA00AA6F86 /* CentralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentralViewController.m; sourceTree = "<group>"; };
 		0D2944CA1BF2D2CF00AA6F86 /* PeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralViewController.h; sourceTree = "<group>"; };
 		0D2944CB1BF2D2CF00AA6F86 /* PeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralViewController.m; sourceTree = "<group>"; };
+		0D2945181BF51D7C00AA6F86 /* NowPlayingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingViewController.h; sourceTree = "<group>"; };
+		0D2945191BF51D7C00AA6F86 /* NowPlayingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				0D29448F1BF2D15100AA6F86 /* ViewController.h */,
 				0D2944901BF2D15100AA6F86 /* ViewController.m */,
 				0D2944921BF2D15100AA6F86 /* Main.storyboard */,
+				0D2945181BF51D7C00AA6F86 /* NowPlayingViewController.h */,
+				0D2945191BF51D7C00AA6F86 /* NowPlayingViewController.m */,
 				0D2944951BF2D15100AA6F86 /* Assets.xcassets */,
 				0D2944971BF2D15100AA6F86 /* LaunchScreen.storyboard */,
 				0D29449A1BF2D15100AA6F86 /* Info.plist */,
@@ -242,7 +247,7 @@
 				TargetAttributes = {
 					0D2944851BF2D15100AA6F86 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 89QAZZNWHS;
+						DevelopmentTeam = 86KZ389579;
 					};
 					0D29449E1BF2D15100AA6F86 = {
 						CreatedOnToolsVersion = 7.1;
@@ -313,6 +318,7 @@
 				0D2944CF1BF3230900AA6F86 /* PeripheralViewController.h in Sources */,
 				0D2944D01BF3230900AA6F86 /* ViewController.h in Sources */,
 				0D2944911BF2D15100AA6F86 /* ViewController.m in Sources */,
+				0D29451A1BF51D7C00AA6F86 /* NowPlayingViewController.m in Sources */,
 				0D2944C61BF2D1A500AA6F86 /* MPCHandler.m in Sources */,
 				0D2944CC1BF2D2CF00AA6F86 /* PeripheralViewController.m in Sources */,
 				0D29448E1BF2D15100AA6F86 /* AppDelegate.m in Sources */,
@@ -462,7 +468,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MPC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.blue.jongmin.MPC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blue1.jongmin.MPC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -476,7 +482,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MPC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.blue.jongmin.MPC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blue1.jongmin.MPC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

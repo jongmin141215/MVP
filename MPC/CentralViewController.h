@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSDictionary *testData;
 @property NSUInteger songSize;
 @property (strong, nonatomic) NSArray *songTitles;
+@property (strong, nonatomic) NSArray *artworks;
 @property (strong,nonatomic) NSString *songToPlayTitle;
 
 @end

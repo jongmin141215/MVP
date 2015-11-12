@@ -7,6 +7,7 @@
 //  MVP!! Bug fixed
 
 #import "CentralViewController.h"
+#import "NowPlayingViewController.h"
 @import MultipeerConnectivity;
 @import AVFoundation;
 
@@ -89,8 +90,12 @@
 //    NSLog(@"Value 3 is %@",[myDictionary objectForKey:@"songList"][2]);
     
     if ([[myDictionary objectForKey:@"play"]  isEqual: @"No"]){
-        
+        NSLog(@"before sending artwork");
         self.songTitles = [myDictionary objectForKey:@"songList"];
+        self.artworks = [myDictionary objectForKey:@"artworks"];
+        NSLog(@"after sending artwokr");
+        
+        
         
         NSLog(@"This is the list of songs not a file size to play a song!");
         NSLog(@"Value 1 is %@",self.songTitles[0]);
@@ -282,8 +287,19 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSString *current = [self.songTitles objectAtIndex:indexPath.row];
-    
     cell.textLabel.text = current;
+    NSLog(@"artworks", self.artworks);
+    UIImage *artwork = [self.artworks objectAtIndex:indexPath.row];
+    NSLog(@"artwork: %@", artwork);
+    NSLog(@"artwork class, %@", [artwork class]);
+    
+    if (artwork) {
+                cell.imageView.image = artwork;
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"No-artwork-albums.png"];
+            }
+    
+    
 //    cell.detailTextLabel.text = [current valueForProperty:MPMediaItemPropertyAlbumArtist];
     
 //    MPMediaItemArtwork *artwork = [current valueForProperty:MPMediaItemPropertyArtwork];
@@ -312,7 +328,6 @@
     
     NSDictionary * playSongTitle = @{@"song": _songToPlayTitle};
     NSData *myData = [NSKeyedArchiver archivedDataWithRootObject: playSongTitle];
-    
     [self.appDelegate.mpcHandler.session sendData:myData
                                           toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
                                          withMode:MCSessionSendDataReliable
@@ -320,6 +335,14 @@
 
     
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    NowPlayingViewController *npvc = [segue destinationViewController];
+//    npvc.player = self.player;
+    npvc.songTitle = _songToPlayTitle;
 }
 
 

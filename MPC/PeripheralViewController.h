@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSData *fullSongData;
 @property (strong, nonatomic) NSData *playingSongData;
 @property (strong, nonatomic) NSMutableArray *songTitles;
+@property (strong, nonatomic) NSMutableArray *artworks;
 @property (strong, nonatomic) NSArray *songs;
 @property (strong, nonatomic) NSMutableDictionary *fullSongDictionary;
 @property int byteIndex;
