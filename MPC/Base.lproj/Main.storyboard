@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jal-XK-vV1">
-                                <rect key="frame" x="0.0" y="505" width="78" height="63"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jal-XK-vV1">
+                                <rect key="frame" x="60" y="505" width="78" height="55"/>
                                 <color key="backgroundColor" red="0.35120131441663344" green="0.39395950064833368" blue="0.52223405934343436" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,8 +28,8 @@
                                     <segue destination="sPQ-5a-rHM" kind="push" id="eko-JU-EHd"/>
                                 </connections>
                             </button>
-                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i1-xn-DeO">
-                                <rect key="frame" x="207" y="512" width="85" height="56"/>
+                            <button contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i1-xn-DeO">
+                                <rect key="frame" x="180" y="504" width="85" height="56"/>
                                 <color key="backgroundColor" red="0.30007350939999999" green="0.33547081229999998" blue="0.44166272099999998" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,13 +39,24 @@
                                     <segue destination="JW2-Gk-vBt" kind="push" id="53y-rS-9xm"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="background-1" translatesAutoresizingMaskIntoConstraints="NO" id="9OP-Kz-q51">
-                                <rect key="frame" x="0.0" y="64" width="320" height="450"/>
+                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background-1" translatesAutoresizingMaskIntoConstraints="NO" id="9OP-Kz-q51">
+                                <rect key="frame" x="0.0" y="64" width="320" height="433"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Air Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bM-Tm-hrt">
+                                <rect key="frame" x="199" y="40" width="101" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="9OP-Kz-q51" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7yR-EO-Nrc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9OP-Kz-q51" secondAttribute="bottom" constant="71" id="9Nb-Lq-hRa"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7i1-xn-DeO" secondAttribute="bottom" constant="7" id="IoS-HI-JMq"/>
                             <constraint firstItem="9OP-Kz-q51" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="Tkv-ST-GzV"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Jal-XK-vV1" secondAttribute="bottom" constant="8" id="dA2-O3-ocx"/>
+                            <constraint firstItem="4bM-Tm-hrt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="17" id="ucy-A0-bCe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="s43-CH-cQV"/>
@@ -116,7 +127,6 @@
         <!--Central View Controller-->
         <scene sceneID="n6N-Jo-Dg8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rn0-UE-yXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="JW2-Gk-vBt" customClass="CentralViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="16h-Yi-aTt"/>
@@ -164,6 +174,7 @@
                         <outlet property="playlist" destination="cso-o6-7l2" id="2Yw-QD-gUr"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rn0-UE-yXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="979" y="-133"/>
         </scene>
