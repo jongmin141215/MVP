@@ -7,6 +7,7 @@
 //
 
 #import "NowPlayingViewController.h"
+#import "CentralViewController.h"
 
 @interface NowPlayingViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleValue;
@@ -36,9 +37,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (UIViewController *)backViewController
+{
+    NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
+    
+    if (numberOfViewControllers < 2)
+        return nil;
+    else
+        return [self.navigationController.viewControllers objectAtIndex:numberOfViewControllers - 2];
+}
 
 - (IBAction)playToggle:(id)sender {
-    [self.player pause];
+    CentralViewController * prevController = [self backViewController];
+    [[prevController player] pause];
+    
+//    [self.player pause];
     
 }
 
