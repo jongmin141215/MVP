@@ -17,29 +17,11 @@
 
 @implementation CentralViewController
 
-//- (IBAction)sendAndPlayTest:(id)sender {
-//    
-//    NSError *error;
-//
-//    NSData *myData = [NSKeyedArchiver archivedDataWithRootObject:_testData];
-//    
-//    [self.appDelegate.mpcHandler.session sendData:myData
-//                                          toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
-//                                         withMode:MCSessionSendDataReliable
-//                                            error:&error];
-//}
-//
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    _playlist.delegate = self;
-//    _testData = @{@"song":@"Cedarwood Road"};
-//    _songToPlayTitle = [[NSString alloc]init];
-    
-//    self.playButton.enabled = NO;
-    
+    self.currentDownloadedSongs = [[NSMutableDictionary alloc]init];
     self.selectedSong = [[NSString alloc]init];
     self.currentPlayingSong = [[NSString alloc]init];
     self.playingSong = NO;
@@ -312,6 +294,11 @@
     if (_playingSong && _selectedSong == _currentPlayingSong) {
         [self.player pause];
         _playingSong = NO;
+        
+        if ([_currentDownloadedSongs objectForKey:_currentPlayingSong] == nil) {
+            [_currentDownloadedSongs setObject:_bufferedSongData forKey:_currentPlayingSong];
+        }
+        
         NSLog(@"pause called");
         return;
     }
@@ -319,43 +306,20 @@
     if (!_playingSong && _selectedSong == _currentPlayingSong) {
         [self.player play];
         _playingSong = YES;
+        
+        if ([_currentDownloadedSongs objectForKey:_currentPlayingSong] == nil) {
+            [_currentDownloadedSongs setObject:_bufferedSongData forKey:_currentPlayingSong];
+        }
+        
         NSLog(@"resume play called");
         return;
     }
     
-
     
-    
-//    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:@"streaming-file:///"] options:nil];
-//    [asset.resourceLoader setDelegate:self queue:dispatch_get_main_queue()];
-//    
-//    self.pendingRequests = [NSMutableArray array];
-//    
-//    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-//    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-//    NSLog(@"Play audio!!!");
-//    [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
-
-    
-    
-//    AVAsset *asset = [AVURLAsset URLAssetWithURL:url1 options:nil];
-//    AVPlayerItem *anItem = [AVPlayerItem playerItemWithAsset:asset];
-//    if (player != nil)
     [self.player pause];
-//        [self.player removeObserver:self forKeyPath:@"status"];
-    
-//    player = [AVPlayer playerWithPlayerItem:anItem];
-//    [player addObserver:self forKeyPath:@"status" options:0 context:nil];
     [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
-    
-//    if (player != nil && [player currentItem] != nil)
-//        [[player currentItem] removeObserver:self forKeyPath:@"timedMetadata"];
-//    AVPlayerItem *item = player.currentItem;
-//    [item addObserver:self forKeyPath:@"timedMetadata" options:NSKeyValueObservingOptionInitial|     NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld| NSKeyValueObservingOptionPrior context:nil];
-//    [player play];
-//    
-    
-    self.player = nil;
+     self.player = nil;
+   
     self.bufferedSongData = nil;
     self.bufferedSongData = [NSMutableData data];
     NSError *error;
@@ -368,12 +332,34 @@
                                           toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
                                          withMode:MCSessionSendDataReliable
                                             error:&error];
-
-    
-    
 }
 
 
 
 
 @end
+
+
+
+
+//    if ([_currentDownloadedSongs objectForKey:_selectedSong] != nil) {
+//        _bufferedSongData = nil;
+//        _bufferedSongData = [NSMutableData data];
+//        _bufferedSongData = [_currentDownloadedSongs objectForKey:_selectedSong];
+//        NSLog(@"length of buffer is %lu", (unsigned long)_bufferedSongData.length);
+//        _currentPlayingSong = _selectedSong;
+//        _playingSong = YES;
+//
+//        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:@"streaming-file:///"] options:nil];
+//        [asset.resourceLoader setDelegate:self queue:dispatch_get_main_queue()];
+//
+//        self.pendingRequests = [NSMutableArray array];
+//
+//        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+//        self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+//        NSLog(@"Play audio from here!!!");
+//        [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+//        return;
+//    }
+
+

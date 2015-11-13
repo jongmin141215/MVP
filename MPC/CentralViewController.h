@@ -23,5 +23,6 @@
 @property (strong,nonatomic) NSString *selectedSong;
 @property (strong,nonatomic) NSString *currentPlayingSong;
 @property (nonatomic) BOOL playingSong;
+@property (strong, nonatomic) NSMutableDictionary * currentDownloadedSongs;
 
 @end

@@ -36,10 +36,15 @@
             NSLog(@"Len was %i, byte index is %i", len, _byteIndex);
             _byteIndex += len;
             
+            //Need to add this...
+            
             if (len == 0) {
                 [stream close];
                 _byteIndex = 0;
             }
+            
+            //Need to add this...
+            
             break;
         }
     }
