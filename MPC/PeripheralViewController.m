@@ -267,7 +267,6 @@
 }
 
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -281,7 +280,8 @@
     
     MPMediaItem *current = [self.songs objectAtIndex:indexPath.row];
     
-//    cell.textLabel.font = [UIFont fontWithName:@"ArialMT" size:20];
+//    cell.textLabel.textColor = [UIColor colorWithRed:0.5 green:0.7 blue:0.7 alpha:0.6];
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:16];
     cell.textLabel.text = [current valueForProperty: MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [current valueForProperty:MPMediaItemPropertyAlbumArtist];
     

@@ -291,6 +291,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSString *current = [self.songTitles objectAtIndex:indexPath.row];
+//    cell.textLabel.textColor = [UIColor blackColor];
+//    cell.textLabel.textColor = [UIColor colorWithRed:0.5 green:0.7 blue:0.7 alpha:0.9];
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Medium " size:16];
     cell.textLabel.text = current;
     NSLog(@"artworks", self.artworks);
     UIImage *artwork = [self.artworks objectAtIndex:indexPath.row];
