@@ -19,33 +19,6 @@
 @implementation PeripheralViewController
 
 
-- (IBAction)sendMusic:(id)sender {
-//    [self.appDelegate.mpcHandler advertiseSelf:NO];
-//    
-//    NSError *error;
-//    
-//    NSLog(@"PERR: %@", self.appDelegate.mpcHandler.session.connectedPeers[0]);
-//    
-//    int songLen = _fullSongData.length;
-//    [self.appDelegate.mpcHandler.session sendData:[NSData dataWithBytes:&songLen length:sizeof(songLen)]
-//                                          toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
-//                                         withMode:MCSessionSendDataReliable
-//                                            error:&error];
-//    
-//    NSStream *outputStream = [self.appDelegate.mpcHandler.session startStreamWithName:@"musicStream" toPeer:self.appDelegate.mpcHandler.session.connectedPeers[0] error:&error];
-//    
-//    outputStream.delegate = self;
-//    [outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop]
-//                            forMode:NSDefaultRunLoopMode];
-//    [outputStream open];
-//    
-//    if (error != nil) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    } else {
-//        NSLog(@"Success! Started music stream");
-//    }
-}
-
 - (void)stream:(NSOutputStream *)stream handleEvent:(NSStreamEvent)eventCode
 {
     switch(eventCode) {
@@ -62,6 +35,11 @@
             len = [stream write:(const uint8_t *)buf maxLength:len];
             NSLog(@"Len was %i, byte index is %i", len, _byteIndex);
             _byteIndex += len;
+            
+            if (len == 0) {
+                [stream close];
+                _byteIndex = 0;
+            }
             break;
         }
     }
@@ -76,13 +54,6 @@
     _fullSongDictionary = [[NSMutableDictionary alloc]init];
     _fullSongData = [NSData data];
     _playingSongData = [NSData data];
-    
-    
-//    _songTitles = @{@"song1":@"best ever",@"song2":@"worst ever"};
-    
-    //    NSURL *url = [[NSBundle mainBundle] URLForResource:@"test" withExtension:@"m4a"];
-    //    _fullSongData = [NSData dataWithContentsOfURL:url];
-
     
     self.appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
@@ -115,8 +86,8 @@
     
     //songs need to be exported and ready!
     
-//    [self.appDelegate.mpcHandler advertiseSelf:NO];
-    [self.appDelegate.mpcHandler advertiseSelf:YES];
+    [self.appDelegate.mpcHandler advertiseSelf:NO];
+//    [self.appDelegate.mpcHandler advertiseSelf:YES];
     
     NSError *error;
     
@@ -148,6 +119,18 @@
     
     if (error != nil) {
         NSLog(@"%@", [error localizedDescription]);
+        NSLog(@"This is THE error");
+//        [outputStream close];
+        NSLog(@"Closed it!");
+        
+//        NSStream *outputStream = [self.appDelegate.mpcHandler.session startStreamWithName:@"musicStream1" toPeer:self.appDelegate.mpcHandler.session.connectedPeers[0] error:&error];
+//        
+//        outputStream.delegate = self;
+//        [outputStream scheduleInRunLoop:[NSRunLoop mainRunLoop]
+//                                forMode:NSDefaultRunLoopMode];
+//        [outputStream open];
+        
+        
     } else {
         NSLog(@"Success! Started music stream");
     }

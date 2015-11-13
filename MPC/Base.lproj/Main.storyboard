@@ -66,7 +66,7 @@
                                         <rect key="frame" x="0.0" y="92" width="259" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3ti-Ec-uqb" id="rlu-Gp-5RB">
-                                            <rect key="frame" x="0.0" y="0.0" width="259" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="259" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -86,16 +86,6 @@
                                 <state key="normal" title="Pick Song"/>
                                 <connections>
                                     <action selector="pickSong:" destination="sPQ-5a-rHM" eventType="touchUpInside" id="lnB-ZM-Kwc"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="c0b-bO-CGA">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qow-4L-yuB">
-                                <rect key="frame" x="224" y="7" width="80" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send Music"/>
-                                <connections>
-                                    <action selector="sendMusic:" destination="sPQ-5a-rHM" eventType="touchUpInside" id="bzA-9Y-Jao"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -128,7 +118,7 @@
                                         <rect key="frame" x="0.0" y="92" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rnI-mh-qQz" id="7Xv-Ka-lcY">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

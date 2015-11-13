@@ -4,7 +4,7 @@
 //
 //  Created by Jongmin Kim on 11/11/15.
 //  Copyright © 2015 Jongmin Kim. All rights reserved.
-//  MVP!! Bug fixed
+//  MVP!! Bug fixed  Now can play more than 1 songs!!!
 
 #import "CentralViewController.h"
 @import MultipeerConnectivity;
@@ -36,9 +36,13 @@
     
 //    _playlist.delegate = self;
 //    _testData = @{@"song":@"Cedarwood Road"};
-    _songToPlayTitle = [[NSString alloc]init];
+//    _songToPlayTitle = [[NSString alloc]init];
     
 //    self.playButton.enabled = NO;
+    
+    self.selectedSong = [[NSString alloc]init];
+    self.currentPlayingSong = [[NSString alloc]init];
+    self.playingSong = NO;
     self.bufferedSongData = [NSMutableData data];
     self.pendingRequests = [NSMutableArray array];
     
@@ -255,9 +259,6 @@
     }
 }
 
-- (IBAction)playButtonPressed:(id)sender {
-    [self.player play];
-}
 - (IBAction)searchForPeers:(id)sender {
     if (self.appDelegate.mpcHandler.session != nil) {
         [[self.appDelegate mpcHandler] setupBrowser];
@@ -301,16 +302,66 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"Cell is selected!!!!");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int rowNo = indexPath.row;
-    NSLog(@"We got this %d",rowNo);
+    _selectedSong = _songTitles[rowNo];
+    NSLog(@"%@ was selected.", _selectedSong);
     
-    _songToPlayTitle = _songTitles[rowNo];
     
+    if (_playingSong && _selectedSong == _currentPlayingSong) {
+        [self.player pause];
+        _playingSong = NO;
+        NSLog(@"pause called");
+        return;
+    }
+    
+    if (!_playingSong && _selectedSong == _currentPlayingSong) {
+        [self.player play];
+        _playingSong = YES;
+        NSLog(@"resume play called");
+        return;
+    }
+    
+
+    
+    
+//    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:@"streaming-file:///"] options:nil];
+//    [asset.resourceLoader setDelegate:self queue:dispatch_get_main_queue()];
+//    
+//    self.pendingRequests = [NSMutableArray array];
+//    
+//    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+//    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+//    NSLog(@"Play audio!!!");
+//    [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+
+    
+    
+//    AVAsset *asset = [AVURLAsset URLAssetWithURL:url1 options:nil];
+//    AVPlayerItem *anItem = [AVPlayerItem playerItemWithAsset:asset];
+//    if (player != nil)
+    [self.player pause];
+//        [self.player removeObserver:self forKeyPath:@"status"];
+    
+//    player = [AVPlayer playerWithPlayerItem:anItem];
+//    [player addObserver:self forKeyPath:@"status" options:0 context:nil];
+    [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
+    
+//    if (player != nil && [player currentItem] != nil)
+//        [[player currentItem] removeObserver:self forKeyPath:@"timedMetadata"];
+//    AVPlayerItem *item = player.currentItem;
+//    [item addObserver:self forKeyPath:@"timedMetadata" options:NSKeyValueObservingOptionInitial|     NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld| NSKeyValueObservingOptionPrior context:nil];
+//    [player play];
+//    
+    
+    self.player = nil;
+    self.bufferedSongData = nil;
+    self.bufferedSongData = [NSMutableData data];
     NSError *error;
-    
-    
-    NSDictionary * playSongTitle = @{@"song": _songToPlayTitle};
+    NSDictionary * playSongTitle = @{@"song": _selectedSong};
+    _currentPlayingSong = _selectedSong;
+    _playingSong = YES;
     NSData *myData = [NSKeyedArchiver archivedDataWithRootObject: playSongTitle];
     
     [self.appDelegate.mpcHandler.session sendData:myData

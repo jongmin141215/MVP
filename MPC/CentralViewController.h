@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSDictionary *testData;
 @property NSUInteger songSize;
 @property (strong, nonatomic) NSArray *songTitles;
-@property (strong,nonatomic) NSString *songToPlayTitle;
+@property (strong,nonatomic) NSString *selectedSong;
+@property (strong,nonatomic) NSString *currentPlayingSong;
+@property (nonatomic) BOOL playingSong;
 
 @end

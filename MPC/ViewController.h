@@ -11,7 +11,7 @@
 
 @interface ViewController : UIViewController
 
-@property (strong, nonatomic) AppDelegate *appDelegate;
+//@property (strong, nonatomic) AppDelegate *appDelegate;
 
 @end
 
