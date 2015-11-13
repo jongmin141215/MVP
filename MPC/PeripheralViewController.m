@@ -62,6 +62,12 @@
             len = [stream write:(const uint8_t *)buf maxLength:len];
             NSLog(@"Len was %i, byte index is %i", len, _byteIndex);
             _byteIndex += len;
+            
+            if (len == 0) {
+                [stream close];
+                _byteIndex = 0;
+            }
+            
             break;
         }
     }
@@ -275,6 +281,7 @@
     
     MPMediaItem *current = [self.songs objectAtIndex:indexPath.row];
     
+//    cell.textLabel.font = [UIFont fontWithName:@"ArialMT" size:20];
     cell.textLabel.text = [current valueForProperty: MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [current valueForProperty:MPMediaItemPropertyAlbumArtist];
     

@@ -35,6 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.selectedSong = [[NSString alloc]init];
+    self.currentPlayingSong = [[NSString alloc]init];
+    self.playingSong = NO;
+    
 //    _playlist.delegate = self;
 //    _testData = @{@"song":@"Cedarwood Road"};
     _songToPlayTitle = [[NSString alloc]init];
@@ -318,11 +322,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    NSLog(@"Cell is selected!!!!");
+
     int rowNo = indexPath.row;
     NSLog(@"We got this %d",rowNo);
-    
-    _songToPlayTitle = _songTitles[rowNo];
+        _songToPlayTitle = _songTitles[rowNo];
     _songToPlayArtwork = _artworks[rowNo];
+    NSLog(@"%@ was selected.", _songToPlayTitle);
+    
+    
+    [self.player pause];
+    [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
+    self.player = nil;
+    
+    self.bufferedSongData = nil;
+    self.bufferedSongData = [NSMutableData data];
+    
+    
     
     NSError *error;
     
