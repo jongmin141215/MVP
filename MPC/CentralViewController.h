@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 @import AVFoundation;
 
-@interface CentralViewController : ViewController
+@interface CentralViewController : UIViewController
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 
@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSArray *songTitles;
 @property (strong, nonatomic) NSArray *artworks;
 @property (strong, nonatomic) NSString *songToPlayTitle;
+@property (strong, nonatomic) UIImage *songToPlayArtwork;
 @property (nonatomic) BOOL *isPlaying;
 
 @end

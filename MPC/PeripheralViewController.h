@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 
-@interface PeripheralViewController : ViewController
+@interface PeripheralViewController : UIViewController
 
 - (IBAction)sendMusic:(id)sender;
 - (IBAction)pickSong:(id)sender;

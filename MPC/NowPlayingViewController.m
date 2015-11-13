@@ -11,6 +11,7 @@
 
 @interface NowPlayingViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleValue;
+@property (weak, nonatomic) IBOutlet UIImageView *artworkImage;
 
 @end
 
@@ -19,8 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.titleValue.text = self.songTitle;
-    
+    CentralViewController * prevController = [self backViewController];
+    self.titleValue.text = prevController.songToPlayTitle;
+    self.artworkImage.image  = prevController.songToPlayArtwork;
 }
 
 - (void)didReceiveMemoryWarning {

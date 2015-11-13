@@ -322,6 +322,7 @@
     NSLog(@"We got this %d",rowNo);
     
     _songToPlayTitle = _songTitles[rowNo];
+    _songToPlayArtwork = _artworks[rowNo];
     
     NSError *error;
     

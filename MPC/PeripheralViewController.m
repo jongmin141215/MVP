@@ -232,7 +232,7 @@
     
     for (MPMediaItem *song in self.songs) {
          [self.songTitles addObject:[song valueForProperty: MPMediaItemPropertyTitle]];
-        [self.artworks addObject:[[song valueForProperty:MPMediaItemPropertyArtwork] imageWithSize:CGSizeMake(44, 44)]];
+        [self.artworks addObject:[[song valueForProperty:MPMediaItemPropertyArtwork] imageWithSize:CGSizeMake(100, 100)]];
         [self mediaItemToData:song withTitle:[song valueForProperty: MPMediaItemPropertyTitle]];
         NSLog(@"Number of items exported %lu", (unsigned long)_fullSongDictionary.count);
         NSLog(@"Title %@",[song valueForProperty: MPMediaItemPropertyTitle] );
