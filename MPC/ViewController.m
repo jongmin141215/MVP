@@ -10,16 +10,26 @@
 
 @interface ViewController ()
 
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-    
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"viewwillappear");
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];   //it hides
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    NSLog(@"viewwilldisapper");
+    [self.navigationController setNavigationBarHidden:NO];    // it shows
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

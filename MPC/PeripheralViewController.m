@@ -62,6 +62,12 @@
             len = [stream write:(const uint8_t *)buf maxLength:len];
             NSLog(@"Len was %i, byte index is %i", len, _byteIndex);
             _byteIndex += len;
+            
+            if (len == 0) {
+                [stream close];
+                _byteIndex = 0;
+            }
+            
             break;
         }
     }
@@ -73,6 +79,7 @@
 
     _byteIndex = 0;
     _songTitles = [[NSMutableArray alloc]init];
+    _artworks = [[NSMutableArray alloc] init];
     _fullSongDictionary = [[NSMutableDictionary alloc]init];
     _fullSongData = [NSData data];
     _playingSongData = [NSData data];
@@ -228,8 +235,10 @@
     self.songs = [collection items];
     NSLog(@"got the songs");
     //    [self mediaItemToData:collection.items[0]]; //////////////////
+    
     for (MPMediaItem *song in self.songs) {
          [self.songTitles addObject:[song valueForProperty: MPMediaItemPropertyTitle]];
+        [self.artworks addObject:[[song valueForProperty:MPMediaItemPropertyArtwork] imageWithSize:CGSizeMake(100, 100)]];
         [self mediaItemToData:song withTitle:[song valueForProperty: MPMediaItemPropertyTitle]];
         NSLog(@"Number of items exported %lu", (unsigned long)_fullSongDictionary.count);
         NSLog(@"Title %@",[song valueForProperty: MPMediaItemPropertyTitle] );
@@ -238,24 +247,24 @@
     
     
     
-    
+    NSLog(@"artworks array: %@", _artworks);
     
     NSError *error;
     
     NSLog(@"start");
-    NSDictionary * myHash = @{@"songList":_songTitles,@"play": @"No"};
+    NSDictionary * myHash = @{@"songList":_songTitles, @"artworks": _artworks, @"play": @"No"};
     NSLog(@"end");
+    NSLog(@"myHash: %@", myHash);
     NSData *myData = [NSKeyedArchiver archivedDataWithRootObject: myHash];
     NSLog(@"success");
 //    return;
-    
+    NSLog(@"before sending");
     [self.appDelegate.mpcHandler.session sendData:myData
                                           toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
                                          withMode:MCSessionSendDataReliable
                                             error:&error];
-    
+    NSLog(@"after sending");
 }
-
 
 
 #pragma mark - Table view data source
@@ -271,6 +280,8 @@
     
     MPMediaItem *current = [self.songs objectAtIndex:indexPath.row];
     
+//    cell.textLabel.textColor = [UIColor colorWithRed:0.5 green:0.7 blue:0.7 alpha:0.6];
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:16];
     cell.textLabel.text = [current valueForProperty: MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [current valueForProperty:MPMediaItemPropertyAlbumArtist];
     

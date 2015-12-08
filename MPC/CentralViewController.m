@@ -7,6 +7,7 @@
 //  MVP!! Bug fixed
 
 #import "CentralViewController.h"
+#import "NowPlayingViewController.h"
 @import MultipeerConnectivity;
 @import AVFoundation;
 
@@ -33,6 +34,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.selectedSong = [[NSString alloc]init];
+    self.currentPlayingSong = [[NSString alloc]init];
+    self.playingSong = NO;
     
 //    _playlist.delegate = self;
 //    _testData = @{@"song":@"Cedarwood Road"};
@@ -89,8 +94,12 @@
 //    NSLog(@"Value 3 is %@",[myDictionary objectForKey:@"songList"][2]);
     
     if ([[myDictionary objectForKey:@"play"]  isEqual: @"No"]){
-        
+        NSLog(@"before sending artwork");
         self.songTitles = [myDictionary objectForKey:@"songList"];
+        self.artworks = [myDictionary objectForKey:@"artworks"];
+        NSLog(@"after sending artwokr");
+        
+        
         
         NSLog(@"This is the list of songs not a file size to play a song!");
         NSLog(@"Value 1 is %@",self.songTitles[0]);
@@ -250,7 +259,7 @@
     {
         NSLog(@"READY TO PLAY");
         [self.player play];
-//        self.playButton.enabled = YES;
+        self.isPlaying = YES;
         
     }
 }
@@ -282,8 +291,22 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSString *current = [self.songTitles objectAtIndex:indexPath.row];
-    
+//    cell.textLabel.textColor = [UIColor blackColor];
+//    cell.textLabel.textColor = [UIColor colorWithRed:0.5 green:0.7 blue:0.7 alpha:0.9];
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Medium " size:16];
     cell.textLabel.text = current;
+    NSLog(@"artworks", self.artworks);
+    UIImage *artwork = [self.artworks objectAtIndex:indexPath.row];
+    NSLog(@"artwork: %@", artwork);
+    NSLog(@"artwork class, %@", [artwork class]);
+    
+    if (artwork) {
+                cell.imageView.image = artwork;
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"No-artwork-albums.png"];
+            }
+    
+    
 //    cell.detailTextLabel.text = [current valueForProperty:MPMediaItemPropertyAlbumArtist];
     
 //    MPMediaItemArtwork *artwork = [current valueForProperty:MPMediaItemPropertyArtwork];
@@ -302,17 +325,31 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    NSLog(@"Cell is selected!!!!");
+
     int rowNo = indexPath.row;
     NSLog(@"We got this %d",rowNo);
+        _songToPlayTitle = _songTitles[rowNo];
+    _songToPlayArtwork = _artworks[rowNo];
+    NSLog(@"%@ was selected.", _songToPlayTitle);
     
-    _songToPlayTitle = _songTitles[rowNo];
+    
+    [self.player pause];
+    [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
+    self.player = nil;
+    
+    self.bufferedSongData = nil;
+    self.bufferedSongData = [NSMutableData data];
+    
+    
     
     NSError *error;
     
     
     NSDictionary * playSongTitle = @{@"song": _songToPlayTitle};
     NSData *myData = [NSKeyedArchiver archivedDataWithRootObject: playSongTitle];
-    
     [self.appDelegate.mpcHandler.session sendData:myData
                                           toPeers:@[self.appDelegate.mpcHandler.session.connectedPeers[0]]
                                          withMode:MCSessionSendDataReliable
@@ -320,6 +357,14 @@
 
     
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    NowPlayingViewController *npvc = [segue destinationViewController];
+//    npvc.player = self.player;
+    npvc.songTitle = _songToPlayTitle;
 }
 
 
